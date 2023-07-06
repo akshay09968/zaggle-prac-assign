@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Clone Repository') {
       steps {
-        git ''
+        git 'https://github.com/akshay09968/zaggle-prac-assign.git'
       }
     }
 
