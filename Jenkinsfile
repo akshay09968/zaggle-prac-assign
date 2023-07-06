@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     JD_IMAGE = 'lapulga/angular_default_image'
-    registryCredential = 'a917496c-0229-4f17-b853-5a70b6e3b082'
+    registryCredential = 'Hashirama'
   }
   stages {
     stage('Clone Repository') {
