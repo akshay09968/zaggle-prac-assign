@@ -1,13 +1,13 @@
 pipeline {
   agent any
   environment {
-    JD_IMAGE = 'flamekaiserr/phase_5_4'
+    JD_IMAGE = 'lapulga/hashirama'
     registryCredential = '970d8df2-fffb-4375-9c21-191eda3f2bc9'
   }
   stages {
     stage('Clone Repository') {
       steps {
-        git 'https://github.com/Rohit-Prabhakar-Rao/Phase-5.4_Practice.git'
+        git ''
       }
     }
 
