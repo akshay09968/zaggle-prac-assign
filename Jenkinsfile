@@ -31,7 +31,7 @@ pipeline {
 
     stage('Create Docker Service') {
       steps {
-        sh "sudo docker service create --name phase_5 --replicas 1 ${JD_IMAGE}"
+        sh "sudo docker service create --name angular_default_imaage --replicas 1 ${JD_IMAGE}"
       }
     }
 
@@ -44,7 +44,7 @@ pipeline {
     
     stage('Run Tests') {
       steps {
-        sh 'sudo docker service logs phase_5'
+        sh 'sudo docker service logs angular_default_imaage'
       }
     }
 
