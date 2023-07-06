@@ -11,13 +11,14 @@ pipeline {
       }
     }
         
-    stage('Build Docker Image') {
-      steps {
-        script {
-          sh "sudo docker build -t ${JD_IMAGE} ."
-        }
+  stage('Build Docker Image') {
+    steps {
+      script {
+        sh "sudo docker build -t ${JD_IMAGE} ."
       }
     }
+  }
+
 
     stage('Push Image to Docker Registry') {
       steps {
