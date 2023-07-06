@@ -1,7 +1,7 @@
 # Base image
 FROM node:14
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /Documents/angular/my-angular-app
 # Copy the package.json and package-lock.json files to the working directory
 COPY package*.json ./
 # Install dependencies
@@ -14,7 +14,7 @@ CMD ["npm", "start"]
 
 # Stage 1: Build Angular app
 FROM node:14 as build-stage
-WORKDIR /app
+WORKDIR /Documents/angular/my-angular-app
 COPY package*.json ./
 RUN npm install
 COPY . .
