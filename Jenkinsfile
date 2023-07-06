@@ -4,11 +4,13 @@ pipeline {
     JD_IMAGE = 'lapulga/angular_default_image'
     registryCredential = 'Hashirama'
   }
-  stages {
+      stages {
     stage('Clone Repository') {
       steps {
-        git 'https://github.com/akshay09968/zaggle-prac-assign.git'
+        git branch: 'main', url: 'https://github.com/akshay09968/zaggle-prac-assign.git'
       }
+    }
+
     }
 
     stage('Build Docker Image') {
