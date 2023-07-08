@@ -14,7 +14,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          sh "docker build -t ${JD_IMAGE} ."
+          sh "sudo docker build -t ${JD_IMAGE} ."
         }
       }
     }
