@@ -21,15 +21,16 @@ pipeline {
 
 
 
-    stage('Push Image to Docker Registry') {
-      steps {
-        script {
-          docker.withRegistry('', registryCredential) {
-            sh "sudo docker push ${JD_IMAGE}"
-          }
-        }
+stage('Push Image to Docker Registry') {
+  steps {
+    script {
+      docker.withRegistry('https://registry.example.com', 'registryCredential') {
+        sh "docker push ${JD_IMAGE}"
       }
     }
+  }
+}
+
 
     stage('Create Docker Service') {
       steps {
