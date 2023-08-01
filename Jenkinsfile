@@ -67,7 +67,7 @@ pipeline {
     JD_IMAGE = 'lapulga/angular_default_image'
     REGISTRY_CREDENTIAL = 'Hashirama' // Update this with your actual Docker registry credentials ID
     K8S_NAMESPACE = 'your-namespace' // Update this with the target Kubernetes namespace
-    K8S_DEPLOYMENT_NAME = 'my-angular-app' // Update this with your desired Kubernetes deployment name
+    K8S_DEPLOYMENT_NAME = 'angular-app' // Update this with your desired Kubernetes deployment name
   }
   stages {
     stage('Clone Repository') {
