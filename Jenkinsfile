@@ -80,7 +80,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          sh "sudo docker build -t ${JD_IMAGE} ."
+          sh "docker build -t ${JD_IMAGE} ."
         }
       }
     }
@@ -89,7 +89,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.example.com', REGISTRY_CREDENTIAL) {
-            sh "sudo docker push ${JD_IMAGE}"
+            sh "docker push ${JD_IMAGE}"
           }
         }
       }
@@ -97,13 +97,13 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh "sudo kubectl apply -f kubernetes/deployment.yml --namespace=${K8S_NAMESPACE}"
+        sh "kubectl apply -f kubernetes/deployment.yml --namespace=${K8S_NAMESPACE}"
       }
     }
 
     stage('Run Tests') {
       steps {
-        sh "sudo kubectl logs deployment/${K8S_DEPLOYMENT_NAME} --namespace=${K8S_NAMESPACE}"
+        sh "kubectl logs deployment/${K8S_DEPLOYMENT_NAME} --namespace=${K8S_NAMESPACE}"
       }
     }
   }
