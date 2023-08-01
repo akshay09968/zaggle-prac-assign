@@ -64,6 +64,7 @@
 pipeline {
   agent any
   environment {
+    
     JD_IMAGE = 'lapulga/angular_default_image'
     REGISTRY_CREDENTIAL = 'Hashirama' // Update this with your actual Docker registry credentials ID
     K8S_NAMESPACE = 'default' // Update this with the target Kubernetes namespace
