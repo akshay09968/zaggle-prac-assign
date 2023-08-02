@@ -10,7 +10,7 @@
 # COPY --from=build-stage /Documents/angular/my-angular-app /usr/share/nginx/html
 
 # Build stage
-FROM node:14 as build-stage
+FROM node:16.20.1 as build-stage
 WORKDIR /app
 COPY . .
 RUN npm install
