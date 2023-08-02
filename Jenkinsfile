@@ -66,7 +66,7 @@ pipeline {
   environment {
     
     JD_IMAGE = 'lapulga/angular_default_image'
-    REGISTRY_CREDENTIAL = 'Hashirama' // Update this with your actual Docker registry credentials ID
+    registryCredential = 'Hashirama' // Update this with your actual Docker registry credentials ID
     K8S_NAMESPACE = 'kubernetes-dashboard' // Update this with the target Kubernetes namespace
      // Update this with your desired Kubernetes deployment name
   }
@@ -88,7 +88,7 @@ pipeline {
     stage('Push Image to Docker Registry') {
       steps {
         script {
-          docker.withRegistry('', REGISTRY_CREDENTIAL) {
+          docker.withRegistry('', registryCredential) {
             sh "docker push ${JD_IMAGE}"
           }
         }
