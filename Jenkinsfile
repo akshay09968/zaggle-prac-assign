@@ -66,7 +66,7 @@ pipeline {
   environment {
     
     JD_IMAGE = 'lapulga/angular_default_image'
-    registryCredential = 'Hashirama' // Update this with your actual Docker registry credentials ID
+    registryCredential = 'Tobirama' // Update this with your actual Docker registry credentials ID
     K8S_NAMESPACE = 'kubernetes-dashboard' // Update this with the target Kubernetes namespace
      // Update this with your desired Kubernetes deployment name
   }
