@@ -68,7 +68,7 @@ pipeline {
     JD_IMAGE = 'lapulga/angular_default_image'
     registryCredential = 'Tobirama' // Update this with your actual Docker registry credentials ID
     K8S_NAMESPACE = 'default' // Update this with the target Kubernetes namespace
-     // Update this with your desired Kubernetes deployment name
+    K8S_DEPLOYMENT_NAME='angular-app' // Update this with your desired Kubernetes deployment name
   }
   stages {
     stage('Clone Repository') {
@@ -111,21 +111,15 @@ pipeline {
     // }
 
     stage('Run Tests') {
-  steps {
-    script {
-      def logsOutput = kubectl(
-        kubeconfigId: 'your-kubeconfig-credentials-id', // Update with your Kubernetes credentials ID
-        namespace: K8S_NAMESPACE,
-        command: "logs deployment/${K8S_DEPLOYMENT_NAME}"
-      )
-
-      // Print the logs output to the Jenkins console
-      println logsOutput
-    }
-  }
+        steps {
+          script {
+            def logsOutput = kubectl(
+              kubeconfigId: 'your-kubeconfig-credentials-id', // Update with your Kubernetes credentials ID
+              namespace: K8S_NAMESPACE,
+              command: "logs deployment/${K8S_DEPLOYMENT_NAME}"
+            )
+          }
+        }
 }
-  }
-}
-
 
 
