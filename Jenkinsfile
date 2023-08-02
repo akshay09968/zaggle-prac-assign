@@ -104,11 +104,26 @@ pipeline {
       }
     }
 
+    // stage('Run Tests') {
+    //   steps {
+    //     sh "kubectl logs deployment/${K8S_DEPLOYMENT_NAME} --namespace=${K8S_NAMESPACE}"
+    //   }
+    // }
+
     stage('Run Tests') {
-      steps {
-        sh "kubectl logs deployment/${K8S_DEPLOYMENT_NAME} --namespace=${K8S_NAMESPACE}"
-      }
+  steps {
+    script {
+      def logsOutput = kubectl(
+        kubeconfigId: 'your-kubeconfig-credentials-id', // Update with your Kubernetes credentials ID
+        namespace: K8S_NAMESPACE,
+        command: "logs deployment/${K8S_DEPLOYMENT_NAME}"
+      )
+
+      // Print the logs output to the Jenkins console
+      println logsOutput
     }
+  }
+}
   }
 }
 
