@@ -97,6 +97,7 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
+        sh "minikube start"
         sh "kubectl apply -f kubernetes/deployment.yml --namespace=${K8S_NAMESPACE}"
       }
     }
