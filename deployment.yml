@@ -1,3 +1,24 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: angular-app
+#   namespace: default
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: angular-app
+#   template:
+#     metadata:
+#       labels:
+#         app: angular-app
+#     spec:
+#       containers:
+#         - name: angular-app
+#           image: lapulga/angular_default_image
+#           ports:
+#             - containerPort: 80
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
