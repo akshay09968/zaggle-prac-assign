@@ -61,16 +61,77 @@
 // }
 
 
+// pipeline {
+//   agent any
+//   environment {
+    
+//     JD_IMAGE = 'lapulga/angular_default_image'
+//     registryCredential = 'Tobirama' // Update this with your actual Docker registry credentials ID
+//     K8S_NAMESPACE = 'default' // Update this with the target Kubernetes namespace
+//      // Update this with your desired Kubernetes deployment name
+//   }
+//   stages {
+//     stage('Clone Repository') {
+//       steps {
+//         git branch: 'main', url: 'https://github.com/akshay09968/zaggle-prac-assign.git'
+//       }
+//     }
+        
+//     stage('Build Docker Image') {
+//       steps {
+//         script {
+//           sh "docker build -t ${JD_IMAGE} ."
+//         }
+//       }
+//     }
+
+//     stage('Push Image to Docker Registry') {
+//       steps {
+//         script {
+//           docker.withRegistry('', registryCredential) {
+//             sh "docker push ${JD_IMAGE}"
+//           }
+//         }
+//       }
+//     }
+
+//     stage('Deploy to Kubernetes') {
+//       steps {
+//         sh "kubectl apply -f kubernetes/deployment.yml --namespace=${K8S_NAMESPACE}"
+//       }
+//     }
+
+//     stage('Run Tests') {
+//       steps {
+//         sh "kubectl logs deployment/${K8S_DEPLOYMENT_NAME} --namespace=${K8S_NAMESPACE}"
+//       }
+//     }
+//   }
+// }
+
 pipeline {
   agent any
   environment {
-    
     JD_IMAGE = 'lapulga/angular_default_image'
     registryCredential = 'Tobirama' // Update this with your actual Docker registry credentials ID
-    K8S_NAMESPACE = 'default' // Update this with the target Kubernetes namespace
-     // Update this with your desired Kubernetes deployment name
+    K8S_NAMESPACE = 'kube-name-space' // Update this with the target Kubernetes namespace
+    K8S_DEPLOYMENT_NAME = 'your-deployment-name' // Update this with your desired Kubernetes deployment name
+     
   }
   stages {
+    stage('Create Kubernetes Namespace') {
+      steps {
+        script {
+          kubernetesDeploy(
+            configs: 'apiVersion: v1\nkind: Namespace\nmetadata:\n  name: ${NAMESPACE_NAME}\n',
+            kubeconfigId: 'your-kubeconfig-credentials-id',
+            namespace: 'kube-name-space',
+            kubeCtlExe: 'kubectl'
+          )
+        }
+      }
+    }
+
     stage('Clone Repository') {
       steps {
         git branch: 'main', url: 'https://github.com/akshay09968/zaggle-prac-assign.git'
@@ -108,3 +169,4 @@ pipeline {
     }
   }
 }
+
