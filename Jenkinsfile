@@ -118,20 +118,7 @@ pipeline {
     K8S_DEPLOYMENT_NAME = 'your-deployment-name' // Update this with your desired Kubernetes deployment name
      
   }
-  stages {
-    stage('Create Kubernetes Namespace') {
-      steps {
-        script {
-          kubernetesDeploy(
-            configs: 'apiVersion: v1\nkind: Namespace\nmetadata:\n  name: ${NAMESPACE_NAME}\n',
-            kubeconfigId: 'your-kubeconfig-credentials-id',
-            namespace: 'kube-name-space',
-            kubeCtlExe: 'kubectl'
-          )
-        }
-      }
-    }
-
+  
     stage('Clone Repository') {
       steps {
         git branch: 'main', url: 'https://github.com/akshay09968/zaggle-prac-assign.git'
