@@ -157,7 +157,7 @@ pipeline {
         // sh "minikube stop -p minikube" // Stop the specified profile
         // sh "minikube delete -p minikube" // Delete the specified profile
         sh "minikube start --driver=virtualbox --profile=minikube"
-        sh "kubectl run $KUBE_POD_NAME --image=$DOCKER_IMAGE --restart=Always --port=80 --namespace=$KUBE_NAMESPACE"
+        sh "kubectl run $KUBE_POD_NAME --image=$DOCKER_IMAGE --restart=Always --port=80 --namespace=$K8S_NAMESPACE"
 }
     }
 
