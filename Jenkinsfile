@@ -103,12 +103,13 @@ pipeline {
       }
     }
 
-    stage('Run Tests') {
-      steps {
-        sh "kubectl logs deployment/${K8S_DEPLOYMENT_NAME} --namespace=${K8S_NAMESPACE}"
-      }
+    stage('Clean up') {
+      always {
+            // Cleanup steps
+            sh 'minikube stop'
+            sh 'minikube delete'
+        }
     }
-  }
 }
 
 
