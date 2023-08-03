@@ -150,11 +150,15 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh "minikube stop"
-        sh "minikube delete"
+        // sh "minikube stop"
+        // sh "minikube delete"
+        // sh "minikube start --driver=virtualbox --profile=my-minikube"
+        // sh "kubectl run $KUBE_POD_NAME --image=$DOCKER_IMAGE --restart=Always --port=80 --namespace=$KUBE_NAMESPACE"
+        sh "minikube stop -p my-minikube" // Stop the specified profile
+        sh "minikube delete -p my-minikube" // Delete the specified profile
         sh "minikube start --driver=virtualbox --profile=my-minikube"
         sh "kubectl run $KUBE_POD_NAME --image=$DOCKER_IMAGE --restart=Always --port=80 --namespace=$KUBE_NAMESPACE"
-      }
+}
     }
 
     stage('Clean up') {
