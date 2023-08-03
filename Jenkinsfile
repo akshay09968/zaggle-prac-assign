@@ -162,9 +162,7 @@ pipeline {
 
     stage('Checking whether pod is created or not'){
       steps{
-        sleep{
-          sleep 60
-        }
+        sleep 60
         sh "kubectl get deployments --namespace=${K8S_NAMESPACE}"
         sh "kubectl describe pods --namespace=${K8S_NAMESPACE}"
       }
