@@ -157,8 +157,14 @@ pipeline {
         // sh "minikube stop -p minikube" // Stop the specified profile
         // sh "minikube delete -p minikube" // Delete the specified profile
         sh "minikube start --driver=virtualbox --profile=minikube"
-        sh "kubectl run $KUBE_POD_NAME --image=$JD_IMAGE --restart=Always --port=80 --namespace=$K8S_NAMESPACE"
-}
+        sh "kubectl apply -f deployment.yml --namespace=${K8S_NAMESPACE}"
+        }
+    }
+
+    stage('Checking whether pod is created or not'){
+      steps{
+        sh "kubectl get deployments --namespace=${K8S_NAMESPACE}"
+      }
     }
 
     stage('Clean up') {
