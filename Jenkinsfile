@@ -166,6 +166,7 @@ pipeline {
           sleep 60
         }
         sh "kubectl get deployments --namespace=${K8S_NAMESPACE}"
+        sh "kubectl describe pods --namespace=${K8S_NAMESPACE}"
       }
     }
 
