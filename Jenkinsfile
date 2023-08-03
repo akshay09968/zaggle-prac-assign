@@ -116,8 +116,7 @@
 
 pipeline {
   agent any
-  environment {
-    
+  environment { 
     JD_IMAGE = 'lapulga/angular_default_image'
     registryCredential = 'Tobirama' // Update this with your actual Docker registry credentials ID
     K8S_NAMESPACE = 'default' // Update this with the target Kubernetes namespace
@@ -163,6 +162,9 @@ pipeline {
 
     stage('Checking whether pod is created or not'){
       steps{
+        sleep{
+          sleep 60
+        }
         sh "kubectl get deployments --namespace=${K8S_NAMESPACE}"
       }
     }
