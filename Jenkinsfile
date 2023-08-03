@@ -104,7 +104,7 @@ pipeline {
     }
 
     stage('Clean up') {
-      always {
+      steps {
             // Cleanup steps
             sh 'minikube stop'
             sh 'minikube delete'
