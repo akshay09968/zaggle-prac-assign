@@ -61,6 +61,59 @@
 // }
 
 
+// pipeline {
+//   agent any
+//   environment {
+    
+//     JD_IMAGE = 'lapulga/angular_default_image'
+//     registryCredential = 'Tobirama' // Update this with your actual Docker registry credentials ID
+//     K8S_NAMESPACE = 'default' // Update this with the target Kubernetes namespace
+//   }
+//   stages {
+//     stage('Clone Repository') {
+//       steps {
+//         git branch: 'main', url: 'https://github.com/akshay09968/zaggle-prac-assign.git'
+//       }
+//     }
+        
+//     stage('Build Docker Image') {
+//       steps {
+//         script {
+//           sh "docker build -t ${JD_IMAGE} ."
+//         }
+//       }
+//     }
+
+//     stage('Push Image to Docker Registry') {
+//       steps {
+//         script {
+//           docker.withRegistry('', registryCredential) {
+//             sh "docker push ${JD_IMAGE}"
+//           }
+//         }
+//       }
+//     }
+
+//     stage('Deploy to Kubernetes') {
+//       steps {
+//         sh "minikube stop"
+//         sh "minikube delete"
+//         sh "minikube start --driver=virtualbox"
+//         // sh "kubectl apply -f kubernetes/deployment.yml --namespace=${K8S_NAMESPACE}"
+//       }
+//     }
+
+//     stage('Clean up') {
+//       steps {
+//             // Cleanup steps
+//             sh 'minikube stop'
+//             sh 'minikube delete'
+//         }
+//     }
+// }
+// }
+
+
 pipeline {
   agent any
   environment {
@@ -68,6 +121,7 @@ pipeline {
     JD_IMAGE = 'lapulga/angular_default_image'
     registryCredential = 'Tobirama' // Update this with your actual Docker registry credentials ID
     K8S_NAMESPACE = 'default' // Update this with the target Kubernetes namespace
+    KUBE_POD_NAME = 'my-angular-pod'
   }
   stages {
     stage('Clone Repository') {
@@ -99,7 +153,7 @@ pipeline {
         sh "minikube stop"
         sh "minikube delete"
         sh "minikube start --driver=virtualbox"
-        // sh "kubectl apply -f kubernetes/deployment.yml --namespace=${K8S_NAMESPACE}"
+        sh "kubectl run $KUBE_POD_NAME --image=$DOCKER_IMAGE --restart=Always --port=80 --namespace=$KUBE_NAMESPACE"
       }
     }
 
@@ -112,4 +166,3 @@ pipeline {
     }
 }
 }
-
